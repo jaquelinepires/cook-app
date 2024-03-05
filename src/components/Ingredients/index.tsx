@@ -1,8 +1,11 @@
-import { FlatList, Image, Pressable, ScrollView, Text } from "react-native";
+import { ScrollView } from "react-native";
 import { styles } from "./styles";
-import { Ingredient } from "../Ingredient";
+import { Ingredient, IngredientsProps } from "../Ingredient";
 
-export function Ingredients() {
+type Props = {
+  ingredients: IngredientsProps[]
+}
+export function Ingredients({ingredients}: Props) {
   return(
     <ScrollView
       horizontal
@@ -10,8 +13,14 @@ export function Ingredients() {
       contentContainerStyle={styles.ingredientsContent}
       showsHorizontalScrollIndicator={false}
     >
-      
-        <Ingredient />
+    {ingredients.map((ingredient) => (
+        <Ingredient
+          key={ingredient.name}
+          name={ingredient.name}
+          image={ingredient.image}
+        />
+      ))}
+  
       
 
   </ScrollView>
