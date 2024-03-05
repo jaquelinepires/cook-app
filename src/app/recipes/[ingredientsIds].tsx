@@ -1,39 +1,39 @@
-import { useEffect, useState } from "react"
-import { FlatList, Text, View } from "react-native"
-import { router, useLocalSearchParams } from "expo-router"
-import MaterialIcons from "@expo/vector-icons/MaterialIcons"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
+import { FlatList, Text, View } from "react-native";
 
-import { services } from "@/services"
+import { styles } from "./styles";
 
-import { styles } from "./styles"
-import { Recipe } from "@/components/Recipe"
-import { Loading } from "@/components/Loading"
-import { Ingredients } from "@/components/Ingredients"
+import { Ingredients } from "@/components/Ingredients";
+import { Loading } from "@/components/Loading";
+import { Recipe } from "@/components/Recipe";
+import { services } from "@/services";
 
 export default function Recipes() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [recipes, setRecipes] = useState<RecipeResponse[]>([])
-  const [ingredients, setIngredients] = useState<IngredientResponse[]>([])
+  const [isLoading, setIsLoading] = useState(true);
+  const [recipes, setRecipes] = useState<RecipeResponse[]>([]);
+  const [ingredients, setIngredients] = useState<IngredientResponse[]>([]);
 
-  const params = useLocalSearchParams<{ ingredientsIds: string }>()
-  const ingredientsIds = params.ingredientsIds.split(",")
+  const params = useLocalSearchParams<{ ingredientsIds: string }>();
+  const ingredientsIds = params.ingredientsIds.split(",");
 
   useEffect(() => {
     services.recipes
       .findByIngredientsIds(ingredientsIds)
       .then((response) => setRecipes(response))
-      .finally(() => setIsLoading(false))
-  }, [])
+      .finally(() => setIsLoading(false));
+  }, []);
 
   useEffect(() => {
     services.ingredients
       .findByIds(ingredientsIds)
       .then((response) => setIngredients(response))
-      .finally(() => setIsLoading(false))
-  }, [])
+      .finally(() => setIsLoading(false));
+  }, []);
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -48,7 +48,7 @@ export default function Recipes() {
         <Text style={styles.title}>Ingredientes</Text>
       </View>
 
-      {<Ingredients ingredients={ingredients} />}
+      <Ingredients ingredients={ingredients} />
 
       <FlatList
         data={recipes}
@@ -71,5 +71,5 @@ export default function Recipes() {
         )}
       />
     </View>
-  )
+  );
 }

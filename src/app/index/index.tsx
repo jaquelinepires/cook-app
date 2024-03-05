@@ -1,48 +1,47 @@
-import { useEffect, useState } from "react"
-import { View, Text, ScrollView, Alert } from "react-native"
-import { router } from "expo-router"
+import { router } from "expo-router";
+import { useEffect, useState } from "react";
+import { View, Text, ScrollView, Alert } from "react-native";
 
-import { services } from "@/services"
+import { styles } from "./styles";
 
-import { styles } from "./styles"
-import { Loading } from "@/components/Loading"
-
-import { Ingredient } from "@/components/Ingredient"
-import { Selected } from "@/components/selected"
+import { Ingredient } from "@/components/Ingredient";
+import { Loading } from "@/components/Loading";
+import { Selected } from "@/components/selected";
+import { services } from "@/services";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [selected, setSelected] = useState<string[]>([])
-  const [ingredients, setIngredients] = useState<IngredientResponse[]>([])
+  const [isLoading, setIsLoading] = useState(true);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [ingredients, setIngredients] = useState<IngredientResponse[]>([]);
 
   function handleToggleSelected(value: string) {
     if (selected.includes(value)) {
-      return setSelected((state) => state.filter((item) => item !== value))
+      return setSelected((state) => state.filter((item) => item !== value));
     }
 
-    setSelected((state) => [...state, value])
+    setSelected((state) => [...state, value]);
   }
 
   function handleClearSelected() {
     Alert.alert("Limpar", "Deseja limpar tudo?", [
       { text: "Não", style: "cancel" },
       { text: "Sim", onPress: () => setSelected([]) },
-    ])
+    ]);
   }
 
   function handleSearch() {
-    router.navigate("/recipes/" + selected)
+    router.navigate("/recipes/" + selected);
   }
 
   useEffect(() => {
     services.ingredients
       .findAll()
       .then(setIngredients)
-      .finally(() => setIsLoading(false))
-  }, [])
+      .finally(() => setIsLoading(false));
+  }, []);
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -79,5 +78,5 @@ export default function Home() {
         />
       )}
     </View>
-  )
+  );
 }

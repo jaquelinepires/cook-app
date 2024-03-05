@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from "react-native";
 
-import { theme } from "@/theme"
+import { theme } from "@/theme";
 
 export const styles = StyleSheet.create({
   button: {
@@ -16,4 +16,4 @@ export const styles = StyleSheet.create({
     fontSize: theme.fonts.size.body.sm,
     fontFamily: theme.fonts.family.medium,
   },
-})
+});

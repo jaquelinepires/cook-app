@@ -1,6 +1,6 @@
-import * as recipes from "./recipesService"
-import * as ingredients from "./ingredientsService"
-import * as preparations from "./preparationsService"
+import * as ingredients from "./ingredientsService";
+import * as preparations from "./preparationsService";
+import * as recipes from "./recipesService";
 
 export const services = {
   recipes,
@@ -8,6 +8,7 @@ export const services = {
   preparations,
 
   storage: {
-    imagePath: "https://mopmowqobgvhdfwnhtpt.supabase.co/storage/v1/object/public/ingredients",
+    imagePath:
+      "https://mopmowqobgvhdfwnhtpt.supabase.co/storage/v1/object/public/ingredients",
   },
-}
+};

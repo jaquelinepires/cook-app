@@ -1,17 +1,17 @@
-import { View, Text } from "react-native"
-import MaterialIcons from "@expo/vector-icons/MaterialIcons"
-import Animated, { BounceOutDown, SlideInDown } from "react-native-reanimated"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { View, Text } from "react-native";
+import Animated, { BounceOutDown, SlideInDown } from "react-native-reanimated";
 
-import { theme } from "@/theme"
-import { styles } from "./styles"
+import { styles } from "./styles";
 
-import { Button } from "@/components/Button"
+import { Button } from "@/components/Button";
+import { theme } from "@/theme";
 
 type Props = {
-  quantity: number
-  onClear: () => void
-  onSearch: () => void
-}
+  quantity: number;
+  onClear: () => void;
+  onSearch: () => void;
+};
 
 export function Selected({ quantity, onClear, onSearch }: Props) {
   return (
@@ -33,5 +33,5 @@ export function Selected({ quantity, onClear, onSearch }: Props) {
 
       <Button title="Encontrar" onPress={onSearch} />
     </Animated.View>
-  )
+  );
 }

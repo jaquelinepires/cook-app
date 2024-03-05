@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native"
-import { theme } from "@/theme"
+import { StyleSheet } from "react-native";
+
+import { theme } from "@/theme";
 
 export const styles = StyleSheet.create({
   container: { flex: 1 },
@@ -35,4 +36,4 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.family.regular,
     color: theme.colors.gray_400,
   },
-})
+});

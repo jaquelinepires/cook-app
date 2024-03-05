@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native"
-import { theme } from "@/theme"
+import { StyleSheet } from "react-native";
+
+import { theme } from "@/theme";
 
 export const styles = StyleSheet.create({
   container: {
@@ -28,4 +29,4 @@ export const styles = StyleSheet.create({
     paddingBottom: 200,
     gap: 12,
   },
-})
+});

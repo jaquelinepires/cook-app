@@ -1,52 +1,50 @@
-import { useEffect, useState } from "react"
-import { FlatList, Image, Text, View } from "react-native"
-import MaterialIcons from "@expo/vector-icons/MaterialIcons"
-import { Redirect, router, useLocalSearchParams } from "expo-router"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Redirect, router, useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
+import { FlatList, Image, Text, View } from "react-native";
 
-import { services } from "@/services"
+import { styles } from "./styles";
 
-import { styles } from "./styles"
-import { Step } from "@/components/Step"
-import { Loading } from "@/components/Loading"
-import { Ingredients } from "@/components/Ingredients"
+import { Ingredients } from "@/components/Ingredients";
+import { Loading } from "@/components/Loading";
+import { Step } from "@/components/Step";
+import { services } from "@/services";
 
 export default function Recipe() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [recipe, setRecipe] = useState<RecipeResponse | null>(null)
-  const [ingredients, setIngredients] = useState<IngredientResponse[]>([])
-  const [preparations, setPreparations] = useState<PreparationsResponse[]>([])
+  const [isLoading, setIsLoading] = useState(true);
+  const [recipe, setRecipe] = useState<RecipeResponse | null>(null);
+  const [ingredients, setIngredients] = useState<IngredientResponse[]>([]);
+  const [preparations, setPreparations] = useState<PreparationsResponse[]>([]);
 
-  const { id } = useLocalSearchParams<{ id: string }>()
+  const { id } = useLocalSearchParams<{ id: string }>();
 
   useEffect(() => {
     services.recipes
       .show(id)
       .then((response) => setRecipe(response))
-      .finally(() => setIsLoading(false))
-  }, [])
+      .finally(() => setIsLoading(false));
+  }, []);
 
   useEffect(() => {
-    services.ingredients
-      .findByRecipeId(id)
-      .then((response) => {
-        console.log(response)
-        setIngredients(response)})
-  }, [])
+    services.ingredients.findByRecipeId(id).then((response) => {
+      console.log(response);
+      setIngredients(response);
+    });
+  }, []);
 
   useEffect(() => {
-    services.preparations
-      .findByRecipeId(id)
-      .then((response) => {
-        console.log(response)
-        setPreparations(response)})
-  }, [])
+    services.preparations.findByRecipeId(id).then((response) => {
+      console.log(response);
+      setPreparations(response);
+    });
+  }, []);
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   if (!id || !recipe) {
-    return <Redirect href="/" />
+    return <Redirect href="/" />;
   }
 
   return (
@@ -81,5 +79,5 @@ export default function Recipe() {
         </View>
       </View>
     </View>
-  )
+  );
 }
